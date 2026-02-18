@@ -3,15 +3,22 @@ export default {
     theme: {
       extend: {
         colors: {
-          bg:      '#0F172A',
-          card:    '#1E293B',
-          accent:  '#38BDF8',
-          warning: '#F59E0B',
-          danger:  '#EF4444',
-          txt:     '#F1F5F9',
-          muted:   '#94A3B8',
+          bg:      '#FFF8F0',
+          card:    '#FFFBF5',
+          accent:  '#FF6B6B',
+          accent2: '#4ECDC4',
+          warning: '#FFE66D',
+          danger:  '#FF6B6B',
+          success: '#95E1D3',
+          txt:     '#2F2F2F',
+          muted:   '#6B6B6B',
+          purple:  '#A8DADC',
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
         },
       },
     },
     plugins: [],
   }
+  
