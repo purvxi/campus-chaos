@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import DashLayout from '../components/DashLayout'
 import { useAssignments } from '../hooks/useAssignments'
-
+import PageTransition from '../components/PageTransition'
 export default function AssignmentsPage() {
   const { assignments, loading, addAssignment, updateStatus, deleteAssignment } = useAssignments()
   
@@ -56,7 +56,7 @@ export default function AssignmentsPage() {
 
   return (
     <DashLayout>
-      
+     <PageTransition>
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-txt mb-2">📝 Assignment Tracker</h1>
@@ -178,7 +178,7 @@ export default function AssignmentsPage() {
           })}
         </div>
       )}
-
+</PageTransition>
     </DashLayout>
   )
 }

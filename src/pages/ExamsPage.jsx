@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import DashLayout from '../components/DashLayout'
 import { useExams } from '../hooks/useExams'
-
+import PageTransition from '../components/PageTransition'
 export default function ExamsPage() {
   const { exams, loading, addExam, updatePrepStatus, deleteExam } = useExams()
   
@@ -69,7 +69,7 @@ export default function ExamsPage() {
 
   return (
     <DashLayout>
-      
+      <PageTransition>
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-txt mb-2">📚 Upcoming Exams</h1>
@@ -208,7 +208,7 @@ export default function ExamsPage() {
           })}
         </div>
       )}
-
+</PageTransition>
     </DashLayout>
   )
 }

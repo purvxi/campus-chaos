@@ -28,6 +28,7 @@ export default {
         'card-2': 'cardSlideUp 0.5s ease-out 0.5s both',
         'card-3': 'cardSlideUp 0.5s ease-out 0.6s both',
         'count-up': 'pulse 1.5s ease-in-out',
+        'float': 'float 3s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -50,6 +51,10 @@ export default {
         cardSlideUp: {
           '0%': { transform: 'translateY(30px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
         },
       },
     },

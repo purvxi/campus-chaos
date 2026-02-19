@@ -1,6 +1,6 @@
 import DashLayout from '../components/DashLayout'
 import { useSubjects } from '../hooks/useSubjects'
-
+import PageTransition from '../components/PageTransition'
 export default function BunkPage() {
   const { subjects, loading } = useSubjects()
 
@@ -93,7 +93,7 @@ export default function BunkPage() {
 
   return (
     <DashLayout>
-      
+      <PageTransition>
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-txt mb-2">🧮 Can I Bunk?</h1>
@@ -170,7 +170,7 @@ export default function BunkPage() {
           </p>
         </div>
       )}
-
+</PageTransition>
     </DashLayout>
   )
 }

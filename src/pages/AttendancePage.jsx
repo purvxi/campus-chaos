@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import DashLayout from '../components/DashLayout'
 import { useSubjects } from '../hooks/useSubjects'
-
+import PageTransition from '../components/PageTransition'
 export default function AttendancePage() {
   const { subjects, loading, addSubject, markPresent, markAbsent, deleteSubject } = useSubjects()
   
@@ -49,7 +49,7 @@ export default function AttendancePage() {
 
   return (
     <DashLayout>
-      
+       <PageTransition>
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-txt mb-2">📊 Attendance Tracker</h1>
@@ -183,7 +183,7 @@ export default function AttendancePage() {
           })}
         </div>
       )}
-
+</PageTransition>
     </DashLayout>
   )
 }

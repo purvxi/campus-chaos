@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSubjects } from '../hooks/useSubjects'
 import { useAssignments } from '../hooks/useAssignments'
 import { useExams } from '../hooks/useExams'
-
+import Card3D from '../components/Card3D'
 export default function Dashboard() {
   const navigate = useNavigate()
   const [mounted, setMounted] = useState(false)
@@ -74,7 +74,7 @@ export default function Dashboard() {
     <DashLayout>
       
       {/* Hero Strip */}
-      <div className={`bg-card rounded-2xl p-8 mb-8 border border-txt/10 shadow-sm transition-all duration-700 ${
+      <div className={`bg-card/80 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-txt/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)] transition-all duration-700 ${
         mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
       }`}>
         <div className="flex items-center justify-between">
@@ -90,109 +90,121 @@ export default function Dashboard() {
         </div>
       </div>
       
-      {/* Daily Quote Card - WITH ROTATION */}
-<div className={`bg-warning p-6 rounded-xl shadow-lg mb-8 max-w-md transition-all duration-700 delay-200 ${
+      {/* Daily Quote Card - 3D DEPTH */}
+<Card3D className={`max-w-md transition-all duration-700 delay-200 mb-12 ${
   mounted ? 'opacity-100 rotate-1 translate-y-0' : 'opacity-0 rotate-0 translate-y-4'
 }`}>
-  <p className="text-txt font-semibold text-lg mb-2">📌 Daily Reality Check</p>
-  <p className="text-txt/80 italic" key={currentQuoteIndex}>"{sarcasticQuotes[currentQuoteIndex]}"</p>
-  <button 
-    onClick={rotateQuote}
-    className="mt-4 text-sm text-txt/60 hover:text-txt underline transition-colors hover:scale-105"
-  >
-    🔄 Another Reality Check
-  </button>
-</div>
+  <div className="bg-warning p-6 rounded-xl shadow-[0_12px_40px_rgba(255,230,109,0.3)] hover:shadow-[0_20px_60px_rgba(255,230,109,0.5)]">
+    <p className="text-txt font-semibold text-lg mb-2">📌 Daily Reality Check</p>
+    <p className="text-txt/80 italic" key={currentQuoteIndex}>"{sarcasticQuotes[currentQuoteIndex]}"</p>
+    <button 
+      onClick={rotateQuote}
+      className="mt-4 text-sm text-txt/60 hover:text-txt underline transition-colors hover:scale-105"
+    >
+      🔄 Another Reality Check
+    </button>
+  </div>
+</Card3D>
       
-      {/* Feature Grid - NOW CLICKABLE WITH REAL STATS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        {/* Card: Attendance - CLICKABLE */}
-        <div 
-          onClick={() => navigate('/attendance')}
-          className={`bg-[#FFDAB9] p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:-rotate-1 duration-500 delay-300 ${
-            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <div className="text-4xl mb-3">📊</div>
-          <h3 className="text-txt font-bold text-xl mb-2">Attendance Tracker</h3>
-          <p className="text-txt/70 text-sm mb-4">
-            {subjects.length > 0 
-              ? `${subjects.length} subjects • ${avgAttendance}% avg`
-              : 'No subjects tracked yet'
-            }
-          </p>
-          <button className="text-accent font-semibold text-sm hover:underline">View Stats →</button>
-        </div>
-        
-        {/* Card: Bunk Calculator - CLICKABLE */}
-        <div 
-          onClick={() => navigate('/bunk')}
-          className={`bg-success p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:rotate-1 duration-500 delay-400 ${
-            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <div className="text-4xl mb-3">🧮</div>
-          <h3 className="text-txt font-bold text-xl mb-2">Can I Bunk?</h3>
-          <p className="text-txt/70 text-sm mb-4">
-            {subjects.length > 0
-              ? `Calculating risk for ${subjects.length} subjects`
-              : 'Add subjects first'
-            }
-          </p>
-          <button className="text-accent font-semibold text-sm hover:underline">Calculate Risk →</button>
-        </div>
-        
-        {/* Card: Assignments - CLICKABLE */}
-        <div 
-          onClick={() => navigate('/assignments')}
-          className={`bg-purple p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:-rotate-2 duration-500 delay-500 ${
-            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <div className="text-4xl mb-3">📝</div>
-          <h3 className="text-txt font-bold text-xl mb-2">Assignment Tracker</h3>
-          <p className="text-txt/70 text-sm mb-4">
-            {assignments.length > 0
-              ? `${pendingAssignments} pending • ${assignments.length} total`
-              : 'No assignments tracked'
-            }
-          </p>
-          <button className="text-accent font-semibold text-sm hover:underline">View Tasks →</button>
-        </div>
-        
-        {/* Card: Exams - CLICKABLE */}
-        <div 
-          onClick={() => navigate('/exams')}
-          className={`bg-[#FFB4B4] p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:rotate-2 duration-500 delay-600 ${
-            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <div className="text-4xl mb-3">📚</div>
-          <h3 className="text-txt font-bold text-xl mb-2">Upcoming Exams</h3>
-          <p className="text-txt/70 text-sm mb-4">
-            {exams.length > 0
-              ? `${upcomingExams} upcoming • ${exams.length} total`
-              : 'No exams scheduled'
-            }
-          </p>
-          <button className="text-accent font-semibold text-sm hover:underline">View Schedule →</button>
-        </div>
-        
-        {/* Card: Damage Report - CLICKABLE */}
-        <div 
-          onClick={() => navigate('/damage')}
-          className={`bg-card p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer border-2 border-danger hover:rotate-1 md:col-span-2 lg:col-span-1 duration-500 delay-700 ${
-            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <div className="text-4xl mb-3">💀</div>
-          <h3 className="text-txt font-bold text-xl mb-2">Damage Report</h3>
-          <p className="text-txt/70 text-sm mb-4">Complete survival analysis</p>
-          <button className="text-danger font-semibold text-sm hover:underline">Face Reality →</button>
-        </div>
-        
-      </div>
+      {/* Feature Grid - NOW WITH 3D EFFECTS */}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  
+  {/* Card: Attendance - 3D */}
+  <Card3D 
+    onClick={() => navigate('/attendance')}
+    className={`cursor-pointer duration-500 delay-300 ${
+      mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+    }`}
+  >
+    <div className="bg-[#FFDAB9] p-6 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_20px_60px_rgba(255,107,107,0.3)] transition-all">
+      <div className="text-4xl mb-3 animate-float">📊</div>
+      <h3 className="text-txt font-bold text-xl mb-2">Attendance Tracker</h3>
+      <p className="text-txt/70 text-sm mb-4">
+        {subjects.length > 0 
+          ? `${subjects.length} subjects • ${avgAttendance}% avg`
+          : 'No subjects tracked yet'
+        }
+      </p>
+      <button className="text-accent font-semibold text-sm hover:underline">View Stats →</button>
+    </div>
+  </Card3D>
+  
+  {/* Card: Bunk Calculator - 3D */}
+  <Card3D 
+    onClick={() => navigate('/bunk')}
+    className={`cursor-pointer duration-500 delay-400 ${
+      mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+    }`}
+  >
+    <div className="bg-success p-6 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_20px_60px_rgba(78,205,196,0.3)] transition-all">
+      <div className="text-4xl mb-3 animate-float" style={{ animationDelay: '0.5s' }}>🧮</div>
+      <h3 className="text-txt font-bold text-xl mb-2">Can I Bunk?</h3>
+      <p className="text-txt/70 text-sm mb-4">
+        {subjects.length > 0
+          ? `Calculating risk for ${subjects.length} subjects`
+          : 'Add subjects first'
+        }
+      </p>
+      <button className="text-accent font-semibold text-sm hover:underline">Calculate Risk →</button>
+    </div>
+  </Card3D>
+  
+  {/* Card: Assignments - 3D */}
+  <Card3D 
+    onClick={() => navigate('/assignments')}
+    className={`cursor-pointer duration-500 delay-500 ${
+      mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+    }`}
+  >
+    <div className="bg-purple p-6 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_20px_60px_rgba(168,218,220,0.3)] transition-all">
+      <div className="text-4xl mb-3 animate-float" style={{ animationDelay: '1s' }}>📝</div>
+      <h3 className="text-txt font-bold text-xl mb-2">Assignment Tracker</h3>
+      <p className="text-txt/70 text-sm mb-4">
+        {assignments.length > 0
+          ? `${pendingAssignments} pending • ${assignments.length} total`
+          : 'No assignments tracked'
+        }
+      </p>
+      <button className="text-accent font-semibold text-sm hover:underline">View Tasks →</button>
+    </div>
+  </Card3D>
+  
+  {/* Card: Exams - 3D */}
+  <Card3D 
+    onClick={() => navigate('/exams')}
+    className={`cursor-pointer duration-500 delay-600 ${
+      mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+    }`}
+  >
+    <div className="bg-[#FFB4B4] p-6 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_20px_60px_rgba(255,180,180,0.3)] transition-all">
+      <div className="text-4xl mb-3 animate-float" style={{ animationDelay: '1.5s' }}>📚</div>
+      <h3 className="text-txt font-bold text-xl mb-2">Upcoming Exams</h3>
+      <p className="text-txt/70 text-sm mb-4">
+        {exams.length > 0
+          ? `${upcomingExams} upcoming • ${exams.length} total`
+          : 'No exams scheduled'
+        }
+      </p>
+      <button className="text-accent font-semibold text-sm hover:underline">View Schedule →</button>
+    </div>
+  </Card3D>
+  
+  {/* Card: Damage Report - 3D */}
+  <Card3D 
+    onClick={() => navigate('/damage')}
+    className={`cursor-pointer md:col-span-2 lg:col-span-1 duration-500 delay-700 ${
+      mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+    }`}
+  >
+    <div className="bg-card p-6 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_20px_60px_rgba(239,68,68,0.3)] border-2 border-danger transition-all">
+      <div className="text-4xl mb-3 animate-float" style={{ animationDelay: '2s' }}>💀</div>
+      <h3 className="text-txt font-bold text-xl mb-2">Damage Report</h3>
+      <p className="text-txt/70 text-sm mb-4">Complete survival analysis</p>
+      <button className="text-danger font-semibold text-sm hover:underline">Face Reality →</button>
+    </div>
+  </Card3D>
+  
+</div>
       
     </DashLayout>
   )

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-
+import Card3D from '../components/Card3D'
 export default function LandingPage() {
   const navigate = useNavigate()
   const [showCards, setShowCards] = useState(false)
@@ -29,33 +29,39 @@ export default function LandingPage() {
         Track attendance, assignments, exams, and your slowly declining sanity.
       </p>
       
-      {/* Sticky Note Cards - slide up when showCards is true */}
-      <div className={`flex flex-wrap justify-center gap-6 mb-12 max-w-3xl transition-all duration-700 ${
-        showCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}>
-        
-        {/* Card 1: Attendance */}
-        <div className="bg-warning p-6 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 rotate-2 cursor-pointer w-44 animate-card-1">
-          <div className="text-3xl mb-2">📊</div>
-          <h3 className="text-txt font-semibold text-lg">Attendance</h3>
-          <p className="text-txt/70 text-sm mt-1">Never miss (too many) classes</p>
-        </div>
-        
-        {/* Card 2: Assignments */}
-        <div className="bg-success p-6 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 -rotate-1 cursor-pointer w-44 animate-card-2">
-          <div className="text-3xl mb-2">📝</div>
-          <h3 className="text-txt font-semibold text-lg">Assignments</h3>
-          <p className="text-txt/70 text-sm mt-1">Track deadlines before they track you</p>
-        </div>
-        
-        {/* Card 3: Exams */}
-        <div className="bg-purple p-6 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 rotate-3 cursor-pointer w-44 animate-card-3">
-          <div className="text-3xl mb-2">📚</div>
-          <h3 className="text-txt font-semibold text-lg">Exams</h3>
-          <p className="text-txt/70 text-sm mt-1">Countdown to academic reckoning</p>
-        </div>
-        
-      </div>
+      {/* Sticky Note Cards - NOW 3D */}
+<div className={`flex flex-wrap justify-center gap-6 mb-12 max-w-3xl transition-all duration-700 ${
+  showCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+}`}>
+  
+  {/* Card 1: Attendance */}
+  <Card3D className="w-44 rotate-2">
+    <div className="bg-warning p-6 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_60px_rgba(255,230,109,0.4)]">
+      <div className="text-3xl mb-2 animate-float">📊</div>
+      <h3 className="text-txt font-semibold text-lg">Attendance</h3>
+      <p className="text-txt/70 text-sm mt-1">Never miss (too many) classes</p>
+    </div>
+  </Card3D>
+  
+  {/* Card 2: Assignments */}
+  <Card3D className="w-44 -rotate-1">
+    <div className="bg-success p-6 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_60px_rgba(149,225,211,0.4)]">
+      <div className="text-3xl mb-2 animate-float" style={{ animationDelay: '0.3s' }}>📝</div>
+      <h3 className="text-txt font-semibold text-lg">Assignments</h3>
+      <p className="text-txt/70 text-sm mt-1">Track deadlines before they track you</p>
+    </div>
+  </Card3D>
+  
+  {/* Card 3: Exams */}
+  <Card3D className="w-44 rotate-3">
+    <div className="bg-purple p-6 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_60px_rgba(168,218,220,0.4)]">
+      <div className="text-3xl mb-2 animate-float" style={{ animationDelay: '0.6s' }}>📚</div>
+      <h3 className="text-txt font-semibold text-lg">Exams</h3>
+      <p className="text-txt/70 text-sm mt-1">Countdown to academic reckoning</p>
+    </div>
+  </Card3D>
+  
+</div>
       
       {/* CTA Button - bounce in */}
       <button

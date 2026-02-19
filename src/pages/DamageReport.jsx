@@ -2,7 +2,7 @@ import DashLayout from '../components/DashLayout'
 import { useSubjects } from '../hooks/useSubjects'
 import { useAssignments } from '../hooks/useAssignments'
 import { useExams } from '../hooks/useExams'
-
+import PageTransition from '../components/PageTransition'
 export default function DamageReport() {
   const { subjects } = useSubjects()
   const { assignments } = useAssignments()
@@ -98,7 +98,7 @@ export default function DamageReport() {
 
   return (
     <DashLayout>
-      
+      <PageTransition>
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-txt mb-2">💀 Damage Report</h1>
@@ -194,7 +194,7 @@ export default function DamageReport() {
           "The first step to solving a problem is acknowledging it exists. You're welcome."
         </p>
       </div>
-
+</PageTransition>
     </DashLayout>
   )
 }
