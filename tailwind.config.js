@@ -27,6 +27,7 @@ export default {
         'card-1': 'cardSlideUp 0.5s ease-out 0.4s both',
         'card-2': 'cardSlideUp 0.5s ease-out 0.5s both',
         'card-3': 'cardSlideUp 0.5s ease-out 0.6s both',
+        'count-up': 'pulse 1.5s ease-in-out',
       },
       keyframes: {
         fadeIn: {

@@ -1,6 +1,13 @@
 import DashLayout from '../components/DashLayout'
+import { useState, useEffect } from 'react'
 
 export default function Dashboard() {
+  const [mounted, setMounted] = useState(false)
+  
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+  
   // Placeholder survival score (we'll calculate this later in Phase 5)
   const survivalScore = 67
   
@@ -16,8 +23,10 @@ export default function Dashboard() {
   return (
     <DashLayout>
       
-      {/* Hero Strip */}
-      <div className="bg-card rounded-2xl p-8 mb-8 border border-txt/10 shadow-sm">
+      {/* Hero Strip - fade and slide from top */}
+      <div className={`bg-card rounded-2xl p-8 mb-8 border border-txt/10 shadow-sm transition-all duration-700 ${
+        mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+      }`}>
         <div className="flex items-center justify-between">
           <div>
             <p className="text-muted text-sm uppercase tracking-widest mb-2">System Status</p>
@@ -26,25 +35,29 @@ export default function Dashboard() {
           </div>
           <div className="text-right">
             <p className="text-muted text-xs uppercase tracking-widest mb-2">Survival Probability</p>
-            <p className="text-6xl font-bold text-accent">{survivalScore}%</p>
+            <p className="text-6xl font-bold text-accent animate-count-up">{survivalScore}%</p>
           </div>
         </div>
       </div>
       
-      {/* Daily Quote Card */}
-      <div className="bg-warning p-6 rounded-xl shadow-lg mb-8 rotate-1 max-w-md">
+      {/* Daily Quote Card - rotate in with delay */}
+      <div className={`bg-[#FFDAB9] p-6 rounded-xl shadow-lg mb-8 max-w-md transition-all duration-700 delay-200 ${
+        mounted ? 'opacity-100 rotate-1 translate-y-0' : 'opacity-0 rotate-0 translate-y-4'
+      }`}>
         <p className="text-txt font-semibold text-lg mb-2">📌 Daily Reality Check</p>
         <p className="text-txt/80 italic">"Confidence is high. Attendance is not."</p>
-        <button className="mt-4 text-sm text-txt/60 hover:text-txt underline">
+        <button className="mt-4 text-sm text-txt/60 hover:text-txt underline transition-colors">
           🔄 Another Reality Check
         </button>
       </div>
       
-      {/* Feature Grid */}
+      {/* Feature Grid - cards slide up one by one */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         {/* Card: Attendance */}
-        <div className="bg-[#FFDAB9] p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:-rotate-1">
+        <div className={`bg-[#FFDAB9] p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:-rotate-1 duration-500 delay-300 ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="text-4xl mb-3">📊</div>
           <h3 className="text-txt font-bold text-xl mb-2">Attendance Tracker</h3>
           <p className="text-txt/70 text-sm mb-4">Monitor your presence (or lack thereof)</p>
@@ -52,7 +65,9 @@ export default function Dashboard() {
         </div>
         
         {/* Card: Bunk Calculator */}
-        <div className="bg-success p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:rotate-1">
+        <div className={`bg-success p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:rotate-1 duration-500 delay-400 ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="text-4xl mb-3">🧮</div>
           <h3 className="text-txt font-bold text-xl mb-2">Can I Bunk?</h3>
           <p className="text-txt/70 text-sm mb-4">The eternal student question, answered</p>
@@ -60,7 +75,9 @@ export default function Dashboard() {
         </div>
         
         {/* Card: Assignments */}
-        <div className="bg-purple p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:-rotate-2">
+        <div className={`bg-purple p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:-rotate-2 duration-500 delay-500 ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="text-4xl mb-3">📝</div>
           <h3 className="text-txt font-bold text-xl mb-2">Assignment Tracker</h3>
           <p className="text-txt/70 text-sm mb-4">Because deadlines don't care about your plans</p>
@@ -68,7 +85,9 @@ export default function Dashboard() {
         </div>
         
         {/* Card: Exams */}
-        <div className="bg-[#FFB4B4] p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:rotate-2">
+        <div className={`bg-[#FFB4B4] p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:rotate-2 duration-500 delay-600 ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="text-4xl mb-3">📚</div>
           <h3 className="text-txt font-bold text-xl mb-2">Upcoming Exams</h3>
           <p className="text-txt/70 text-sm mb-4">Countdown to academic judgment day</p>
@@ -76,7 +95,9 @@ export default function Dashboard() {
         </div>
         
         {/* Card: Damage Report */}
-        <div className="bg-card p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer border-2 border-danger hover:rotate-1 md:col-span-2 lg:col-span-1">
+        <div className={`bg-card p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer border-2 border-danger hover:rotate-1 md:col-span-2 lg:col-span-1 duration-500 delay-700 ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="text-4xl mb-3">💀</div>
           <h3 className="text-txt font-bold text-xl mb-2">Damage Report</h3>
           <p className="text-txt/70 text-sm mb-4">The unfiltered truth about your semester</p>
