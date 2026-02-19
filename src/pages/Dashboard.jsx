@@ -41,7 +41,7 @@ export default function Dashboard() {
       </div>
       
       {/* Daily Quote Card - rotate in with delay */}
-      <div className={`bg-[#FFDAB9] p-6 rounded-xl shadow-lg mb-8 max-w-md transition-all duration-700 delay-200 ${
+      <div className={`bg-warning p-6 rounded-xl shadow-lg mb-8 max-w-md transition-all duration-700 delay-200 ${
         mounted ? 'opacity-100 rotate-1 translate-y-0' : 'opacity-0 rotate-0 translate-y-4'
       }`}>
         <p className="text-txt font-semibold text-lg mb-2">📌 Daily Reality Check</p>
