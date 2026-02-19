@@ -1,14 +1,36 @@
 import DashLayout from '../components/DashLayout'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSubjects } from '../hooks/useSubjects'
+import { useAssignments } from '../hooks/useAssignments'
+import { useExams } from '../hooks/useExams'
 
 export default function Dashboard() {
+  const navigate = useNavigate()
   const [mounted, setMounted] = useState(false)
+  
+  // Fetch real data from Supabase
+  const { subjects } = useSubjects()
+  const { assignments } = useAssignments()
+  const { exams } = useExams()
   
   useEffect(() => {
     setMounted(true)
   }, [])
   
-  // Placeholder survival score (we'll calculate this later in Phase 5)
+  // Calculate real stats
+  const avgAttendance = subjects.length > 0
+    ? Math.round(subjects.reduce((acc, s) => acc + (s.total > 0 ? (s.attended / s.total) * 100 : 0), 0) / subjects.length)
+    : 0
+  
+  const pendingAssignments = assignments.filter(a => a.status === 'pending').length
+  
+  const upcomingExams = exams.filter(e => {
+    const daysLeft = Math.ceil((new Date(e.exam_date) - new Date()) / (1000 * 60 * 60 * 24))
+    return daysLeft >= 0
+  }).length
+  
+  // Placeholder survival score (we'll calculate properly in Damage Report)
   const survivalScore = 67
   
   const getVerdict = (score) => {
@@ -23,7 +45,7 @@ export default function Dashboard() {
   return (
     <DashLayout>
       
-      {/* Hero Strip - fade and slide from top */}
+      {/* Hero Strip */}
       <div className={`bg-card rounded-2xl p-8 mb-8 border border-txt/10 shadow-sm transition-all duration-700 ${
         mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
       }`}>
@@ -40,7 +62,7 @@ export default function Dashboard() {
         </div>
       </div>
       
-      {/* Daily Quote Card - rotate in with delay */}
+      {/* Daily Quote Card */}
       <div className={`bg-warning p-6 rounded-xl shadow-lg mb-8 max-w-md transition-all duration-700 delay-200 ${
         mounted ? 'opacity-100 rotate-1 translate-y-0' : 'opacity-0 rotate-0 translate-y-4'
       }`}>
@@ -51,56 +73,91 @@ export default function Dashboard() {
         </button>
       </div>
       
-      {/* Feature Grid - cards slide up one by one */}
+      {/* Feature Grid - NOW CLICKABLE WITH REAL STATS */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
-        {/* Card: Attendance */}
-        <div className={`bg-[#FFDAB9] p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:-rotate-1 duration-500 delay-300 ${
-          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        {/* Card: Attendance - CLICKABLE */}
+        <div 
+          onClick={() => navigate('/attendance')}
+          className={`bg-[#FFDAB9] p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:-rotate-1 duration-500 delay-300 ${
+            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <div className="text-4xl mb-3">📊</div>
           <h3 className="text-txt font-bold text-xl mb-2">Attendance Tracker</h3>
-          <p className="text-txt/70 text-sm mb-4">Monitor your presence (or lack thereof)</p>
+          <p className="text-txt/70 text-sm mb-4">
+            {subjects.length > 0 
+              ? `${subjects.length} subjects • ${avgAttendance}% avg`
+              : 'No subjects tracked yet'
+            }
+          </p>
           <button className="text-accent font-semibold text-sm hover:underline">View Stats →</button>
         </div>
         
-        {/* Card: Bunk Calculator */}
-        <div className={`bg-success p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:rotate-1 duration-500 delay-400 ${
-          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        {/* Card: Bunk Calculator - CLICKABLE */}
+        <div 
+          onClick={() => navigate('/bunk')}
+          className={`bg-success p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:rotate-1 duration-500 delay-400 ${
+            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <div className="text-4xl mb-3">🧮</div>
           <h3 className="text-txt font-bold text-xl mb-2">Can I Bunk?</h3>
-          <p className="text-txt/70 text-sm mb-4">The eternal student question, answered</p>
+          <p className="text-txt/70 text-sm mb-4">
+            {subjects.length > 0
+              ? `Calculating risk for ${subjects.length} subjects`
+              : 'Add subjects first'
+            }
+          </p>
           <button className="text-accent font-semibold text-sm hover:underline">Calculate Risk →</button>
         </div>
         
-        {/* Card: Assignments */}
-        <div className={`bg-purple p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:-rotate-2 duration-500 delay-500 ${
-          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        {/* Card: Assignments - CLICKABLE */}
+        <div 
+          onClick={() => navigate('/assignments')}
+          className={`bg-purple p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:-rotate-2 duration-500 delay-500 ${
+            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <div className="text-4xl mb-3">📝</div>
           <h3 className="text-txt font-bold text-xl mb-2">Assignment Tracker</h3>
-          <p className="text-txt/70 text-sm mb-4">Because deadlines don't care about your plans</p>
+          <p className="text-txt/70 text-sm mb-4">
+            {assignments.length > 0
+              ? `${pendingAssignments} pending • ${assignments.length} total`
+              : 'No assignments tracked'
+            }
+          </p>
           <button className="text-accent font-semibold text-sm hover:underline">View Tasks →</button>
         </div>
         
-        {/* Card: Exams */}
-        <div className={`bg-[#FFB4B4] p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:rotate-2 duration-500 delay-600 ${
-          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        {/* Card: Exams - CLICKABLE */}
+        <div 
+          onClick={() => navigate('/exams')}
+          className={`bg-[#FFB4B4] p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:rotate-2 duration-500 delay-600 ${
+            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <div className="text-4xl mb-3">📚</div>
           <h3 className="text-txt font-bold text-xl mb-2">Upcoming Exams</h3>
-          <p className="text-txt/70 text-sm mb-4">Countdown to academic judgment day</p>
+          <p className="text-txt/70 text-sm mb-4">
+            {exams.length > 0
+              ? `${upcomingExams} upcoming • ${exams.length} total`
+              : 'No exams scheduled'
+            }
+          </p>
           <button className="text-accent font-semibold text-sm hover:underline">View Schedule →</button>
         </div>
         
-        {/* Card: Damage Report */}
-        <div className={`bg-card p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer border-2 border-danger hover:rotate-1 md:col-span-2 lg:col-span-1 duration-500 delay-700 ${
-          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        {/* Card: Damage Report - CLICKABLE */}
+        <div 
+          onClick={() => navigate('/damage')}
+          className={`bg-card p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer border-2 border-danger hover:rotate-1 md:col-span-2 lg:col-span-1 duration-500 delay-700 ${
+            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <div className="text-4xl mb-3">💀</div>
           <h3 className="text-txt font-bold text-xl mb-2">Damage Report</h3>
-          <p className="text-txt/70 text-sm mb-4">The unfiltered truth about your semester</p>
+          <p className="text-txt/70 text-sm mb-4">Complete survival analysis</p>
           <button className="text-danger font-semibold text-sm hover:underline">Face Reality →</button>
         </div>
         
