@@ -13,7 +13,35 @@ export default function Dashboard() {
   const { subjects } = useSubjects()
   const { assignments } = useAssignments()
   const { exams } = useExams()
+  const sarcasticQuotes = [
+    "Confidence is high. Attendance is not.",
+    "Your GPA called. It wants a word.",
+    "Remember when you said 'I'll start tomorrow'? It's tomorrow.",
+    "Motivation is temporary. Deadlines are forever.",
+    "You're not procrastinating. You're 'strategically delaying'.",
+    "That assignment? Still due. Ignoring it won't help.",
+    "Your attendance is a work of fiction.",
+    "Study now or cry later. Your choice.",
+    "The semester ends eventually. Your regrets don't.",
+    "You've attended 60% of classes. The other 40% sends regards.",
+    "Exams don't care about your feelings.",
+    "You said you'd study an hour ago. Still waiting.",
+    "Your future self is judging your current decisions.",
+    "Bunking is fun until it's not.",
+    "Academic consequences have entered the chat.",
+    "That 'I'll be fine' energy isn't backed by data.",
+    "You're one missed class away from a character arc.",
+    "The library exists. Consider visiting.",
+    "Your study plan is solid. Shame you're not following it."
+  ]
   
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(
+    Math.floor(Math.random() * sarcasticQuotes.length)
+  )
+  
+  const rotateQuote = () => {
+    setCurrentQuoteIndex((prev) => (prev + 1) % sarcasticQuotes.length)
+  }
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -62,16 +90,19 @@ export default function Dashboard() {
         </div>
       </div>
       
-      {/* Daily Quote Card */}
-      <div className={`bg-warning p-6 rounded-xl shadow-lg mb-8 max-w-md transition-all duration-700 delay-200 ${
-        mounted ? 'opacity-100 rotate-1 translate-y-0' : 'opacity-0 rotate-0 translate-y-4'
-      }`}>
-        <p className="text-txt font-semibold text-lg mb-2">📌 Daily Reality Check</p>
-        <p className="text-txt/80 italic">"Confidence is high. Attendance is not."</p>
-        <button className="mt-4 text-sm text-txt/60 hover:text-txt underline transition-colors">
-          🔄 Another Reality Check
-        </button>
-      </div>
+      {/* Daily Quote Card - WITH ROTATION */}
+<div className={`bg-warning p-6 rounded-xl shadow-lg mb-8 max-w-md transition-all duration-700 delay-200 ${
+  mounted ? 'opacity-100 rotate-1 translate-y-0' : 'opacity-0 rotate-0 translate-y-4'
+}`}>
+  <p className="text-txt font-semibold text-lg mb-2">📌 Daily Reality Check</p>
+  <p className="text-txt/80 italic" key={currentQuoteIndex}>"{sarcasticQuotes[currentQuoteIndex]}"</p>
+  <button 
+    onClick={rotateQuote}
+    className="mt-4 text-sm text-txt/60 hover:text-txt underline transition-colors hover:scale-105"
+  >
+    🔄 Another Reality Check
+  </button>
+</div>
       
       {/* Feature Grid - NOW CLICKABLE WITH REAL STATS */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
