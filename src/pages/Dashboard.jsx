@@ -44,7 +44,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         {/* Card: Attendance */}
-        <div className="bg-warning p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:-rotate-1">
+        <div className="bg-[#FFDAB9] p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer hover:-rotate-1">
           <div className="text-4xl mb-3">📊</div>
           <h3 className="text-txt font-bold text-xl mb-2">Attendance Tracker</h3>
           <p className="text-txt/70 text-sm mb-4">Monitor your presence (or lack thereof)</p>
