@@ -72,30 +72,36 @@ export default function Dashboard() {
   
   return (
     <DashLayout>
-      
+      return (
+  <DashLayout>
+    <div className="max-w-7xl mx-auto">
+      {/* All your content */}
+    </div>
+  </DashLayout>
+)
       {/* Hero Strip */}
-      <div className={`bg-card/80 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-txt/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)] transition-all duration-700 ${
-        mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-      }`}>
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-muted text-sm uppercase tracking-widest mb-2">System Status</p>
-            <h2 className="text-txt text-3xl font-bold">Reality Check Complete</h2>
-            <p className={`${verdict.color} text-lg mt-1 font-medium`}>{verdict.text}</p>
-          </div>
-          <div className="text-right">
-            <p className="text-muted text-xs uppercase tracking-widest mb-2">Survival Probability</p>
-            <p className="text-6xl font-bold text-accent animate-count-up">{survivalScore}%</p>
-          </div>
-        </div>
-      </div>
+      <div className={`bg-card/80 backdrop-blur-sm rounded-2xl p-4 md:p-8 mb-6 md:mb-8 border border-txt/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)] transition-all duration-700 ${
+  mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+}`}>
+  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <div>
+      <p className="text-muted text-xs md:text-sm uppercase tracking-widest mb-2">System Status</p>
+      <h2 className="text-txt text-xl md:text-3xl font-bold">Reality Check Complete</h2>
+      <p className={`${verdict.color} text-base md:text-lg mt-1 font-medium`}>{verdict.text}</p>
+    </div>
+    <div className="text-left md:text-right">
+      <p className="text-muted text-xs uppercase tracking-widest mb-2">Survival Probability</p>
+      <p className="text-4xl md:text-6xl font-bold text-accent animate-count-up">{survivalScore}%</p>
+    </div>
+  </div>
+</div>
       
       {/* Daily Quote Card - 3D DEPTH */}
-<Card3D className={`max-w-md transition-all duration-700 delay-200 mb-12 ${
+      <Card3D className={`max-w-md transition-all duration-700 delay-200 mb-8 md:mb-12 ${
   mounted ? 'opacity-100 rotate-1 translate-y-0' : 'opacity-0 rotate-0 translate-y-4'
 }`}>
-  <div className="bg-warning p-6 rounded-xl shadow-[0_12px_40px_rgba(255,230,109,0.3)] hover:shadow-[0_20px_60px_rgba(255,230,109,0.5)]">
-    <p className="text-txt font-semibold text-lg mb-2">📌 Daily Reality Check</p>
+  <div className="bg-warning p-4 md:p-6 rounded-xl shadow-[0_12px_40px_rgba(255,230,109,0.3)] hover:shadow-[0_20px_60px_rgba(255,230,109,0.5)]">
+  <p className="text-txt font-semibold text-base md:text-lg mb-2">📌 Daily Reality Check</p>
     <p className="text-txt/80 italic" key={currentQuoteIndex}>"{sarcasticQuotes[currentQuoteIndex]}"</p>
     <button 
       onClick={rotateQuote}
@@ -107,7 +113,7 @@ export default function Dashboard() {
 </Card3D>
       
       {/* Feature Grid - NOW WITH 3D EFFECTS */}
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
   
   {/* Card: Attendance - 3D */}
   <Card3D 

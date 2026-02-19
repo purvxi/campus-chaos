@@ -19,18 +19,18 @@ export default function LandingPage() {
       </div>
       
       {/* Hero Title - typewriter effect via CSS */}
-      <h1 className="text-6xl md:text-7xl font-bold text-center mb-3 tracking-tight overflow-hidden">
-        <span className="text-accent inline-block animate-slide-in-left">Campus</span>
-        <span className="text-accent2 inline-block animate-slide-in-right">Chaos</span>
-      </h1>
+      <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-3 tracking-tight overflow-hidden">
+  <span className="text-accent inline-block animate-slide-in-left">Campus</span>
+  <span className="text-accent2 inline-block animate-slide-in-right">Chaos</span>
+</h1>
       
       {/* Subtitle - fade in with delay */}
-      <p className="text-muted text-lg text-center mb-12 max-w-md animate-fade-in-delayed">
-        Track attendance, assignments, exams, and your slowly declining sanity.
-      </p>
+      <p className="text-muted text-base md:text-lg text-center mb-12 max-w-md px-4">
+  Track attendance, assignments, exams, and your slowly declining sanity.
+</p>
       
       {/* Sticky Note Cards - NOW 3D */}
-<div className={`flex flex-wrap justify-center gap-6 mb-12 max-w-3xl transition-all duration-700 ${
+      <div className={`flex flex-wrap justify-center gap-4 md:gap-6 mb-12 max-w-3xl px-4 transition-all duration-700 ${
   showCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
 }`}>
   

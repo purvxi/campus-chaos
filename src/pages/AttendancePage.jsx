@@ -51,15 +51,15 @@ export default function AttendancePage() {
     <DashLayout>
        <PageTransition>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-txt mb-2">📊 Attendance Tracker</h1>
-        <p className="text-muted">Monitor your presence (or strategic absence)</p>
-      </div>
+<div className="mb-6 md:mb-8">
+  <h1 className="text-3xl md:text-4xl font-bold text-txt mb-2">📊 Attendance Tracker</h1>
+  <p className="text-sm md:text-base text-muted">Monitor your presence (or strategic absence)</p>
+</div>
 
       {/* Add Subject Form */}
       <div className="bg-card p-6 rounded-xl shadow-md border border-txt/10 mb-8">
         <h2 className="text-xl font-semibold text-txt mb-4">Add New Subject</h2>
-        <form onSubmit={handleSubmit} className="flex flex-wrap gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4">
           <input
             type="text"
             placeholder="Subject name"
@@ -106,7 +106,7 @@ export default function AttendancePage() {
           <p className="text-txt/50 text-sm mt-4 italic">"The first step is admitting you have classes."</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {subjects.map((subject, index) => {
             const status = getAttendanceStatus(subject)
             return (

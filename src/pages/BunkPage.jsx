@@ -95,10 +95,10 @@ export default function BunkPage() {
     <DashLayout>
       <PageTransition>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-txt mb-2">🧮 Can I Bunk?</h1>
-        <p className="text-muted">The eternal student question, mathematically answered</p>
-      </div>
+<div className="mb-6 md:mb-8">
+  <h1 className="text-3xl md:text-4xl font-bold text-txt mb-2">🧮 Can I Bunk?</h1>
+  <p className="text-sm md:text-base text-muted">The eternal student question, mathematically answered</p>
+</div>
 
       {subjects.length === 0 ? (
         <div className="bg-success p-12 rounded-xl text-center rotate-1">
@@ -112,7 +112,7 @@ export default function BunkPage() {
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {subjects.map((subject, index) => {
             const bunkInfo = getBunkInfo(subject)
             const currentPercentage = subject.total > 0 

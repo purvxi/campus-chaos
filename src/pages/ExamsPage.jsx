@@ -71,15 +71,15 @@ export default function ExamsPage() {
     <DashLayout>
       <PageTransition>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-txt mb-2">📚 Upcoming Exams</h1>
-        <p className="text-muted">Countdown to academic judgment day</p>
-      </div>
+<div className="mb-6 md:mb-8">
+  <h1 className="text-3xl md:text-4xl font-bold text-txt mb-2">📚 Upcoming Exams</h1>
+  <p className="text-sm md:text-base text-muted">Countdown to academic judgment day</p>
+</div>
 
       {/* Add Exam Form */}
       <div className="bg-card p-6 rounded-xl shadow-md border border-txt/10 mb-8">
         <h2 className="text-xl font-semibold text-txt mb-4">Add New Exam</h2>
-        <form onSubmit={handleSubmit} className="flex flex-wrap gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4">
           <input
             type="text"
             placeholder="Subject name"

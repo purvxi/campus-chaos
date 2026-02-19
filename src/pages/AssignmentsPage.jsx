@@ -82,7 +82,7 @@ export default function AssignmentsPage() {
       {/* Add Assignment Form */}
       <div className="bg-card p-6 rounded-xl shadow-md border border-txt/10 mb-8">
         <h2 className="text-xl font-semibold text-txt mb-4">Add New Assignment</h2>
-        <form onSubmit={handleSubmit} className="flex flex-wrap gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4">
           <input
             type="text"
             placeholder="Assignment title"
@@ -121,7 +121,7 @@ export default function AssignmentsPage() {
           <p className="text-txt/70">Either you're very responsible or very unaware.</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4 md:space-y-6">
           {assignments.map((assignment, index) => {
             const daysLeft = getDaysUntilDue(assignment.due_date)
             const statusInfo = getStatusColor(assignment.status, daysLeft)
