@@ -72,13 +72,7 @@ export default function Dashboard() {
   
   return (
     <DashLayout>
-      return (
-  <DashLayout>
-    <div className="max-w-7xl mx-auto">
-      {/* All your content */}
-    </div>
-  </DashLayout>
-)
+      
       {/* Hero Strip */}
       <div className={`bg-card/80 backdrop-blur-sm rounded-2xl p-4 md:p-8 mb-6 md:mb-8 border border-txt/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)] transition-all duration-700 ${
   mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
