@@ -98,13 +98,19 @@ export default function ExamsPage() {
             <option value="Quiz">Quiz</option>
             <option value="Practical">Practical</option>
           </select>
-          <input
-            type="date"
-            value={formData.exam_date}
-            onChange={(e) => setFormData({ ...formData, exam_date: e.target.value })}
-            className="px-4 py-2 rounded-lg border border-txt/20 bg-bg focus:outline-none focus:ring-2 focus:ring-accent"
-            required
-          />
+          <div className="flex flex-col w-full sm:w-auto">
+  <label className="block text-txt text-xs font-medium mb-1">
+    Exam Date *
+  </label>
+
+  <input
+    type="date"
+    value={formData.exam_date}
+    onChange={(e) => setFormData({ ...formData, exam_date: e.target.value })}
+    className="px-4 py-2 rounded-lg border border-txt/20 bg-bg focus:outline-none focus:ring-2 focus:ring-accent"
+    required
+  />
+</div>
           <select
             value={formData.prep_status}
             onChange={(e) => setFormData({ ...formData, prep_status: e.target.value })}
