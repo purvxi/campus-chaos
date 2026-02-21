@@ -36,19 +36,51 @@ export default function AttendancePage() {
   }
 
   const getAttendanceStatus = (subject) => {
-    if (subject.total === 0) return { percentage: 0, color: 'text-muted', bgColor: 'bg-muted/20', status: 'No data' }
-    
+    if (!subject.total || subject.total === 0) {
+      return {
+        percentage: 0,
+        color: 'text-muted',
+        bgColor: 'bg-muted/20',
+        status: 'No Data',
+        remark: 'Start attending… maybe.'
+      }
+    }
+  
     const percentage = (subject.attended / subject.total) * 100
     const required = subject.required || 75
-    
+  
     if (percentage >= required + 10) {
-      return { percentage: percentage.toFixed(1), color: 'text-success', bgColor: 'bg-success/20', status: 'Safe Zone' }
+      return {
+        percentage: percentage.toFixed(1),
+        color: 'text-success',
+        bgColor: 'bg-success/20',
+        status: 'Safe Zone',
+        remark: 'Relax. You can afford a bunk.'
+      }
     } else if (percentage >= required) {
-      return { percentage: percentage.toFixed(1), color: 'text-accent2', bgColor: 'bg-accent2/20', status: 'On Track' }
+      return {
+        percentage: percentage.toFixed(1),
+        color: 'text-accent2',
+        bgColor: 'bg-accent2/20',
+        status: 'On Track',
+        remark: 'Careful. You’re on the edge.'
+      }
     } else if (percentage >= required - 5) {
-      return { percentage: percentage.toFixed(1), color: 'text-warning', bgColor: 'bg-warning/30', status: 'Warning' }
+      return {
+        percentage: percentage.toFixed(1),
+        color: 'text-warning',
+        bgColor: 'bg-warning/30',
+        status: 'Warning',
+        remark: 'One more bunk and you’re in danger.'
+      }
     } else {
-      return { percentage: percentage.toFixed(1), color: 'text-danger', bgColor: 'bg-danger/20', status: 'At Risk' }
+      return {
+        percentage: percentage.toFixed(1),
+        color: 'text-danger',
+        bgColor: 'bg-danger/20',
+        status: 'At Risk',
+        remark: 'Attend class. Immediately.'
+      }
     }
   }
 
@@ -189,6 +221,9 @@ export default function AttendancePage() {
                     </div>
                     
                     {/* Progress Bar */}
+                    <p className="text-xs italic text-muted mt-2 text-center">
+  {status.remark}
+</p>
                     <div className="w-full bg-txt/10 rounded-full h-2 overflow-hidden">
                       <div
                         className={`h-full transition-all duration-300 ${
