@@ -49,10 +49,16 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <aside className={`
-        ${isMobile ? 'fixed top-0 left-0 h-full z-40' : 'relative'}
-        min-h-screen bg-card border-r border-txt/10 flex flex-col py-8 transition-all duration-300
-        ${isOpen ? 'w-64 px-4' : isMobile ? '-translate-x-full w-64 px-4' : 'w-20 px-2'}
-      `}>
+  ${isMobile ? 'fixed top-0 left-0 h-screen z-40' : 'relative h-screen'}
+  bg-card border-r border-txt/10 flex flex-col py-8
+  transform transition-all duration-300
+  ${isOpen 
+      ? 'translate-x-0 w-64 px-4' 
+      : isMobile 
+          ? '-translate-x-full w-64 px-4' 
+          : 'w-20 px-2'
+  }
+`}>
         
         {/* Logo & Toggle */}
         <div className="flex items-center justify-between mb-10 px-2">
