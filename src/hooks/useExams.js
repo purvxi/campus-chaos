@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
-
+import { useAuth } from '../contexts/AuthContext'
 export function useExams() {
+  const { user } = useAuth()
   const [exams, setExams] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -25,13 +26,16 @@ export function useExams() {
   }
 
   async function addExam(exam) {
+    if (!user) return null
+    
     const { data, error } = await supabase
       .from('exams')
       .insert([{
         subject: exam.subject,
         exam_type: exam.exam_type || '',
         exam_date: exam.exam_date,
-        prep_status: exam.prep_status || 'not_started'
+        prep_status: exam.prep_status || 'not_started',
+        user_id: user.id  // ADD THIS
       }])
       .select()
     

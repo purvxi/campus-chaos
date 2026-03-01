@@ -65,11 +65,11 @@ export default function LandingPage() {
       
       {/* CTA Button - bounce in */}
       <button
-        onClick={() => navigate('/dashboard')}
-        className="bg-accent text-white font-semibold px-8 py-4 rounded-full hover:bg-accent/90 transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg text-base animate-bounce-in"
-      >
-        Start Tracking →
-      </button>
+  onClick={() => navigate('/signup')}
+  className="bg-accent text-white font-semibold px-8 py-4 rounded-full hover:bg-accent/90 transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg text-base animate-bounce-in"
+>
+  Get Started →
+</button>
       
       {/* Footer tagline - fade in last */}
       <p className="text-muted/60 text-xs mt-8 italic animate-fade-in-last">

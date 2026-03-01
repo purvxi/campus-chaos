@@ -1,6 +1,6 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-
+import { useAuth } from '../contexts/AuthContext'
 const links = [
   { to: '/dashboard',    icon: '🏠', label: 'Dashboard'   },
   { to: '/attendance',   icon: '📊', label: 'Attendance'  },
@@ -13,7 +13,15 @@ const links = [
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
+  const { signOut, user } = useAuth()  // ADD THIS
+  const navigate = useNavigate()        // ADD THIS
 
+  const handleLogout = async () => {    // ADD THIS
+    if (window.confirm('Are you sure you want to logout?')) {
+      await signOut()
+      navigate('/login')
+    }
+  }
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768)
@@ -106,9 +114,25 @@ export default function Sidebar() {
           ))}
         </nav>
         
-        {/* Footer */}
+        {/* User Info & Logout */}
+        {isOpen && user && (
+          <div className="mt-auto pt-4 px-2 border-t border-txt/10 space-y-3">
+            <div className="bg-accent/5 p-3 rounded-lg">
+              <p className="text-xs text-muted mb-1">Signed in as:</p>
+              <p className="text-txt text-sm font-medium truncate">{user.email}</p>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="w-full bg-danger/10 text-danger hover:bg-danger/20 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all hover:scale-105 flex items-center justify-center gap-2"
+            >
+              🚪 Logout
+            </button>
+          </div>
+        )}
+
+        {/* Footer Quote */}
         {isOpen && (
-          <div className="mt-auto pt-6 px-2 border-t border-txt/10">
+          <div className="pt-4 px-2">
             <p className="text-muted text-xs italic">
               "Organized chaos is still chaos."
             </p>

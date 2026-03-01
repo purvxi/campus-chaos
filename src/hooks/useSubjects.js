@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
-
+import { useAuth } from '../contexts/AuthContext'
 export function useSubjects() {
+  const { user } = useAuth()
   const [subjects, setSubjects] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -28,23 +29,19 @@ export function useSubjects() {
 
   // ✅ ADD SUBJECT (Clean & Safe)
   async function addSubject(subject) {
-    const total = Number(subject.total) || 0
-    const attended = Number(subject.attended) || 0
-    const required = Number(subject.required) || 75
-
-    // Prevent invalid case
-    if (attended > total) {
-      alert("Attended classes can't be more than total classes.")
+    if (!user) {
+      console.error('No user logged in')
       return null
     }
-
+    
     const { data, error } = await supabase
       .from('subjects')
       .insert([{
-        name: subject.name.trim(),
-        total,
-        attended,
-        required
+        name: subject.name,
+        total: subject.total || 0,
+        attended: subject.attended || 0,
+        required: subject.required || 75,
+        user_id: user.id  // ADD THIS
       }])
       .select()
       .single()

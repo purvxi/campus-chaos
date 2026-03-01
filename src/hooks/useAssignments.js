@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
-
+import { useAuth } from '../contexts/AuthContext'
 export function useAssignments() {
+  const { user } = useAuth()
   const [assignments, setAssignments] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -25,13 +26,16 @@ export function useAssignments() {
   }
 
   async function addAssignment(assignment) {
+    if (!user) return null
+    
     const { data, error } = await supabase
       .from('assignments')
       .insert([{
         title: assignment.title,
         subject: assignment.subject || '',
         due_date: assignment.due_date,
-        status: 'pending'
+        status: 'pending',
+        user_id: user.id  // ADD THIS
       }])
       .select()
     
