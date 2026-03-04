@@ -45,5 +45,5 @@ Uses Supabase with 4 tables:
 
 All tables have Row Level Security enabled for user data privacy.
 
-## Author
-Built by Purvi Kanojiya
+#Built by
+ Purvi Kanojiya

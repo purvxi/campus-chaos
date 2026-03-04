@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function Card3D({ children, className = '', onClick }) {
+export default function Card3D({ children, className = '', onClick, subtle = false }) {
   const [transform, setTransform] = useState('')
 
   const handleMouseMove = (e) => {
@@ -12,10 +12,13 @@ export default function Card3D({ children, className = '', onClick }) {
     const centerX = rect.width / 2
     const centerY = rect.height / 2
     
-    const rotateX = ((y - centerY) / centerY) * -10
-    const rotateY = ((x - centerX) / centerX) * 10
+    // FIXED: Reduced rotation angles for subtle effect (especially for auth pages)
+    const intensity = subtle ? 3 : 10
+    const rotateX = ((y - centerY) / centerY) * -(intensity / 3)
+    const rotateY = ((x - centerX) / centerX) * (intensity / 3)
+    const scale = subtle ? 1.01 : 1.02
     
-    setTransform(`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`)
+    setTransform(`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale}, ${scale}, ${scale})`)
   }
 
   const handleMouseLeave = () => {

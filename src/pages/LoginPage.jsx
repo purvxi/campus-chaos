@@ -50,8 +50,8 @@ export default function LoginPage() {
           <p className="text-muted text-sm">Welcome back! Sign in to continue</p>
         </div>
 
-        {/* Login Card */}
-        <Card3D>
+        {/* Login Card - FIXED: subtle prop added to reduce movement */}
+        <Card3D subtle={true}>
           <div className="bg-card p-8 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-txt/10">
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-txt mb-2">Sign In</h2>

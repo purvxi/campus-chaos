@@ -50,7 +50,8 @@ export default function SignUpPage() {
       <div className="min-h-screen bg-bg flex items-center justify-center px-4 py-12">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-success/10 rounded-full blur-3xl pointer-events-none" />
         
-        <Card3D>
+        {/* FIXED: subtle prop added */}
+        <Card3D subtle={true}>
           <div className="max-w-md w-full bg-card p-8 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-txt/10 text-center relative z-10">
             <div className="text-6xl mb-4 animate-bounce-in">✅</div>
             <h2 className="text-3xl font-bold text-txt mb-4">Check Your Email!</h2>
@@ -96,8 +97,8 @@ export default function SignUpPage() {
           <p className="text-muted text-sm">Start tracking your academic survival today</p>
         </div>
 
-        {/* Sign Up Card */}
-        <Card3D>
+        {/* Sign Up Card - FIXED: subtle prop added */}
+        <Card3D subtle={true}>
           <div className="bg-card p-8 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-txt/10">
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-txt mb-2">Create Account</h2>
