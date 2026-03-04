@@ -71,10 +71,10 @@ export default function ExamsPage() {
     <DashLayout>
       <PageTransition>
       {/* Header */}
-<div className="mb-6 md:mb-8">
-  <h1 className="text-3xl md:text-4xl font-bold text-txt mb-2">📚 Upcoming Exams</h1>
-  <p className="text-sm md:text-base text-muted">Countdown to academic judgment day</p>
-</div>
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-txt mb-2">📚 Upcoming Exams</h1>
+        <p className="text-sm md:text-base text-muted">Countdown to academic judgment day</p>
+      </div>
 
       {/* Add Exam Form */}
       <div className="bg-card p-6 rounded-xl shadow-md border border-txt/10 mb-8">
@@ -99,18 +99,17 @@ export default function ExamsPage() {
             <option value="Practical">Practical</option>
           </select>
           <div className="flex flex-col w-full sm:w-auto">
-  <label className="block text-txt text-xs font-medium mb-1">
-    Exam Date *
-  </label>
-
-  <input
-    type="date"
-    value={formData.exam_date}
-    onChange={(e) => setFormData({ ...formData, exam_date: e.target.value })}
-    className="px-4 py-2 rounded-lg border border-txt/20 bg-bg focus:outline-none focus:ring-2 focus:ring-accent"
-    required
-  />
-</div>
+            <label className="block text-txt text-xs font-medium mb-1">
+              Exam Date *
+            </label>
+            <input
+              type="date"
+              value={formData.exam_date}
+              onChange={(e) => setFormData({ ...formData, exam_date: e.target.value })}
+              className="px-4 py-2 rounded-lg border border-txt/20 bg-bg focus:outline-none focus:ring-2 focus:ring-accent"
+              required
+            />
+          </div>
           <select
             value={formData.prep_status}
             onChange={(e) => setFormData({ ...formData, prep_status: e.target.value })}
@@ -129,15 +128,15 @@ export default function ExamsPage() {
         </form>
       </div>
 
-      {/* Exams List */}
+      {/* Exams List - FIXED: Removed rotation */}
       {exams.length === 0 ? (
-        <div className="bg-purple p-12 rounded-xl text-center rotate-2">
+        <div className="bg-purple p-12 rounded-xl text-center">
           <p className="text-txt text-xl font-semibold mb-2">No exams scheduled!</p>
           <p className="text-txt/70">Living the dream or living in denial?</p>
         </div>
       ) : (
         <div className="space-y-6">
-          {exams.map((exam, index) => {
+          {exams.map((exam) => {
             const daysLeft = getDaysUntil(exam.exam_date)
             const urgency = getUrgencyInfo(daysLeft)
             const currentPrep = prepStatuses.find(s => s.value === exam.prep_status)
@@ -150,9 +149,7 @@ export default function ExamsPage() {
                   daysLeft <= 2 ? 'border-danger/40' :
                   daysLeft <= 7 ? 'border-warning/30' :
                   'border-txt/10'
-                } hover:shadow-lg transition-all ${
-                  index % 2 === 0 ? 'hover:-rotate-1' : 'hover:rotate-1'
-                }`}
+                } hover:shadow-lg transition-all`}
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
@@ -214,7 +211,7 @@ export default function ExamsPage() {
           })}
         </div>
       )}
-</PageTransition>
+      </PageTransition>
     </DashLayout>
   )
 }

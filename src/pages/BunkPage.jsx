@@ -95,13 +95,14 @@ export default function BunkPage() {
     <DashLayout>
       <PageTransition>
       {/* Header */}
-<div className="mb-6 md:mb-8">
-  <h1 className="text-3xl md:text-4xl font-bold text-txt mb-2">🧮 Can I Bunk?</h1>
-  <p className="text-sm md:text-base text-muted">The eternal student question, mathematically answered</p>
-</div>
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-txt mb-2">🧮 Can I Bunk?</h1>
+        <p className="text-sm md:text-base text-muted">The eternal student question, mathematically answered</p>
+      </div>
 
+      {/* No subjects message - FIXED: Removed rotation */}
       {subjects.length === 0 ? (
-        <div className="bg-success p-12 rounded-xl text-center rotate-1">
+        <div className="bg-success p-12 rounded-xl text-center">
           <p className="text-txt text-xl font-semibold mb-2">No subjects to analyze!</p>
           <p className="text-txt/70">Add subjects in Attendance Tracker first.</p>
           <button 
@@ -113,7 +114,7 @@ export default function BunkPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          {subjects.map((subject, index) => {
+          {subjects.map((subject) => {
             const bunkInfo = getBunkInfo(subject)
             const currentPercentage = subject.total > 0 
               ? ((subject.attended / subject.total) * 100).toFixed(1)
@@ -122,9 +123,7 @@ export default function BunkPage() {
             return (
               <div
                 key={subject.id}
-                className={`bg-card p-6 rounded-xl shadow-md border border-txt/10 hover:shadow-lg transition-all ${
-                  index % 2 === 0 ? 'hover:rotate-1' : 'hover:-rotate-1'
-                }`}
+                className="bg-card p-6 rounded-xl shadow-md border border-txt/10 hover:shadow-lg transition-all"
               >
                 {/* Subject Header */}
                 <div className="mb-4">
@@ -165,12 +164,12 @@ export default function BunkPage() {
       {subjects.length > 0 && (
         <div className="mt-8 bg-warning/20 p-6 rounded-xl border border-warning/30">
           <p className="text-txt text-sm">
-            <strong>⚠️ Disclaimer:</strong> This calculator assumes consistent attendance moving forward. 
+            <strong> Disclaimer:</strong> This calculator assumes consistent attendance moving forward. 
             Bunking strategically is an art. Use this data wisely (or ignore it and face consequences).
           </p>
         </div>
       )}
-</PageTransition>
+      </PageTransition>
     </DashLayout>
   )
 }

@@ -99,11 +99,11 @@ export default function DamageReport() {
   return (
     <DashLayout>
       <PageTransition>
-     {/* Header */}
-<div className="mb-6 md:mb-8">
-  <h1 className="text-3xl md:text-4xl font-bold text-txt mb-2">💀 Damage Report</h1>
-  <p className="text-sm md:text-base text-muted">The unfiltered truth about your academic existence</p>
-</div>
+      {/* Header */}
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-txt mb-2">💀 Damage Report</h1>
+        <p className="text-sm md:text-base text-muted">The unfiltered truth about your academic existence</p>
+      </div>
 
       {/* Big Survival Score */}
       <div className="bg-card rounded-2xl p-12 mb-8 border-2 border-accent text-center shadow-xl">
@@ -115,7 +115,7 @@ export default function DamageReport() {
         </div>
       </div>
 
-      {/* Component Breakdown */}
+      {/* Component Breakdown - FIXED: Removed rotation */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
         
         {/* Attendance */}
@@ -194,7 +194,7 @@ export default function DamageReport() {
           "The first step to solving a problem is acknowledging it exists. You're welcome."
         </p>
       </div>
-</PageTransition>
+      </PageTransition>
     </DashLayout>
   )
 }

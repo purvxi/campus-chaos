@@ -114,24 +114,22 @@ export default function AssignmentsPage() {
         </form>
       </div>
 
-      {/* Assignments List */}
+      {/* Assignments List - FIXED: Removed rotation */}
       {assignments.length === 0 ? (
-        <div className="bg-success p-12 rounded-xl text-center -rotate-1">
+        <div className="bg-success p-12 rounded-xl text-center">
           <p className="text-txt text-xl font-semibold mb-2">No assignments yet!</p>
           <p className="text-txt/70">Either you're very responsible or very unaware.</p>
         </div>
       ) : (
         <div className="space-y-4 md:space-y-6">
-          {assignments.map((assignment, index) => {
+          {assignments.map((assignment) => {
             const daysLeft = getDaysUntilDue(assignment.due_date)
             const statusInfo = getStatusColor(assignment.status, daysLeft)
             
             return (
               <div
                 key={assignment.id}
-                className={`bg-card p-6 rounded-xl shadow-md border border-txt/10 hover:shadow-lg transition-all ${
-                  index % 2 === 0 ? 'hover:rotate-1' : 'hover:-rotate-1'
-                }`}
+                className="bg-card p-6 rounded-xl shadow-md border border-txt/10 hover:shadow-lg transition-all"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
