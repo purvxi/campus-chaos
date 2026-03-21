@@ -1,6 +1,23 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = 'https://lkfftdjjwqaortrswbxa.supabase.co'
-const supabaseAnonKey = 'sb_publishable_z0ecycgwWK-6FAQ1GHTiXg_oyfj1oz1'
+// SECURITY: Use environment variables instead of hardcoded credentials
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Validate environment variables
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error(
+    'Missing Supabase environment variables. Please check your .env file.'
+  )
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    // Auto-refresh tokens
+    autoRefreshToken: true,
+    // Persist session in localStorage (encrypted by Supabase)
+    persistSession: true,
+    // Detect session from URL (for email confirmations)
+    detectSessionInUrl: true
+  }
+})
